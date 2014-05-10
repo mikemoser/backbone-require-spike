@@ -1,0 +1,50 @@
+/* 
+  TODO: Seperate CSS into different files for development 
+  and then use build process to consolidated
+  and minify.
+*/
+
+body {
+  background-color: #EEE;
+  text-shadow: 1px 1px 1px #FFF;
+  color: #555;
+}
+
+#page-container {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+#header {
+  text-align: center;
+}
+
+#title {
+  color: #000;
+  font-size: 40px;
+  margin: 0px;
+  font-weight: bold;
+}
+
+#sub-title {
+  text-shadow: 1px 1px 1px #FFF;
+  font-style: italic;
+}
+
+/*
+  Locating View
+*/
+
+.view-container {
+  margin-top: 30px;
+}
+
+.message {
+  text-align: center;  
+}
+
+@media only screen and (min-width: 35em) {
+
+}

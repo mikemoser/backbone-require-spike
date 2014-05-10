@@ -2,18 +2,40 @@ define(function (require) {
   'use strict';
 
   var $             = require('jquery'),
+      _             = require('underscore'),
       Backbone      = require('backbone'),
-      LocatingView  = require('app/views/locating-view'),
+      events        = require('app/events'),
       $content      = $('#content'),
-      locatingView  = new LocatingView({el: $content })
+      LocatingView  = require('app/views/locating-view'),
+      RidesView     = require('app/views/rides-view'),
+      locatingView  = new LocatingView({el: $content }),
+      ridesView     = new RidesView({el: $content }),
+      userLocation  = null;
 
+  // TODO: Make sure there are no zombies.
   return Backbone.Router.extend({
+    initialize: function () {
+      events.on('location.found', _.bind(this.onLocationFound, this));
+    },
     routes: {
-      "" : "locating"
+      "" : "locating",
+      'rides': "rides"
     },
     locating: function () {
-      // TODO: Don't we need to clear our zombies?
       locatingView.render();
+    },
+    rides: function () {
+      // Make sure we have a valid location before rendering nearby rides
+      if (!this.userLocation) {
+        this.navigate('', true);
+        return
+      }
+
+      ridesView.render();  
+    },
+    onLocationFound: function (position) {
+      this.userLocation = position;
+      this.navigate('rides', true);
     }
   });
 });

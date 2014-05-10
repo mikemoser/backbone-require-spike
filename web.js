@@ -14,5 +14,5 @@ app.use('/js', express.static(__dirname + '/client/js'));
 app.use(express.favicon(__dirname + '/client/img/favicon.ico', { maxAge: null })); 
 
 var server = app.listen(3000, function() {
-    console.log('Listening on port %d', server.address().port);
+  console.log('Listening on port %d', server.address().port);
 });
