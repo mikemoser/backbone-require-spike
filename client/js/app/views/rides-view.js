@@ -1,23 +1,20 @@
 define(function (require) {
   'use strict';
 
-  var $             = require('jquery'),
-      _             = require('underscore'),
-      Backbone      = require('backbone'),
-      tpl           = require('text!tpl/rides-tpl.html'),
-      template      = _.template(tpl),
-      events        = require('app/events');
+  var $               = require('jquery'),
+      _               = require('underscore'),
+      Backbone        = require('backbone'),
+      tpl             = require('text!tpl/rides-tpl.html'),
+      template        = _.template(tpl),
+      locationService = require('app/services/location-service');
 
   return Backbone.View.extend({
     initialize: function() {
-      events.on('location.found', this.foundLocation, this);
+      
     },
     render: function () {
-      this.$el.empty().html(template());
+      this.$el.empty().html(template({position: locationService.position}));
       return this;
-    },
-    foundLocation: function (position) {
-      console.log(position);
     }
   });
 });

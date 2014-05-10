@@ -1,6 +1,10 @@
 <div class="view-container center">
-  <div class="message">
-    <div class="throbber"></div>
-    <div>Requesting Your Location</div>
-  </div>
+  <% if (!error) { %>
+    <div class="message">
+      <div class="throbber"></div>
+      <div>Requesting Your Location</div>
+    </div>
+  <% } else { %>
+    <div class="message">There was a problem accessing your location.</div>
+  <% } %>
 </div>

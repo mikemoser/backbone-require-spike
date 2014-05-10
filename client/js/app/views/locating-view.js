@@ -5,31 +5,19 @@ define(function (require) {
       _               = require('underscore'),
       Backbone        = require('backbone'),
       tpl             = require('text!tpl/locating-tpl.html'),
-      errorTpl        = require('text!tpl/locating-error-tpl.html'),
       template        = _.template(tpl),
-      errorTemplate   = _.template(errorTpl),
       events          = require('app/events'),
-      locatingError   = null;
+      locationService = require('app/services/location-service');
 
   return Backbone.View.extend({
     initialize: function() {
-      // TODO: Decouple this from the view
-      navigator.geolocation.getCurrentPosition(
-        _.bind(this.onFoundLocation, this), 
-        _.bind(this.onLocatingError, this)); 
+      events.on('location.error', _.bind(this.onLocationError, this));
     },
     render: function () {
-      if (this.locatingError)
-        this.$el.empty().html(errorTemplate());  
-      else
-        this.$el.empty().html(template());
+      this.$el.empty().html(template({error: locationService.error}));
       return this;
     },
-    onFoundLocation: function(position) {
-      events.trigger('location.found', position);
-    },
-    onLocatingError: function (error) {
-      this.locatingError = error;
+    onLocationError: function (error) {
       this.render();
     }
   });

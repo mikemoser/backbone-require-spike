@@ -18,7 +18,10 @@ require.config({
   }
 });
 
-require(['jquery', 'backbone', 'app/router'], function ($, Backbone, Router) {
+require(['jquery', 'backbone', 'app/router', 'app/services/location-service'], function ($, Backbone, Router, locationService) {
   var router = new Router();
   Backbone.history.start();
+
+  // Ask for the users location when the application loads
+  locationService.requestLocation();
 });
