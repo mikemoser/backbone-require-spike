@@ -3,8 +3,6 @@ define(function (require) {
   var events = require('app/events'),
       _      = require('underscore');
 
-  // TODO: Expire location.
-  // TODO: Decide if we need to watch for location changes.
   var LocationService = function () {
     this.hasValidLocation   = false;
     this.error              = null;

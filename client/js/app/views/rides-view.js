@@ -10,7 +10,7 @@ define(function (require) {
 
   return Backbone.View.extend({
     initialize: function() {
-      
+      //TODO: Load rides  
     },
     render: function () {
       this.$el.empty().html(template({position: locationService.position}));
